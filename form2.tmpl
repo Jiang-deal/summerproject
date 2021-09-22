@@ -1,0 +1,150 @@
+{{define "get/index.tmpl"}}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据补全界面</title>
+<link rel="stylesheet" href="/xxx/style.css">
+<script src="/xxx/echarts.min.js"></script>
+
+<!--引入jquery.js文件 -->
+<!-- <script type="text/javascript" src="/static/script/jquery-1.7.2.js"></script> -->
+<script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+		<div id="login_header"> 
+			<img class="logo_img" alt="" src="/static/img/logo.gif" >
+		</div>
+		
+			<!-- <div class="login_banner" style="background-image: url(/1.jpeg);"> -->
+			<div class="login_banner" >
+				<!-- style="background-color:pink;" -->
+			
+				<!-- <div id="l_content">
+					<span class="login_word">地址判断</span>
+				</div> -->
+				
+				<div id="content">
+					<div class="login_form"  >
+						<div class="login_box">
+							<div class="tit">
+								<h1>请选择文件：</h1>
+							</div><br/>
+							<div class="form">
+								<form method="POST" action="http://127.0.0.1:8080/upload" enctype="multipart/form-data">
+									<form action="http://127.0.0.1:8080/upload" method="POST"   id="btnn"  enctype="multipart/form-data">
+										<input type="file" name="f1">
+										<input type="submit" id="btn" value="上传">
+								</form>
+						</div>
+						
+							<!-- -------------折线图 -->
+							<div id="main1" style="width: 700px;height:300px;"></div>
+							<script type="text/javascript">
+                            //先做一个ajax的请求，在把获取的数据填充到表格里面
+                            
+							
+							var chartDom = document.getElementById('main1');
+							var myChart = echarts.init(chartDom);
+							var option;
+							//jia
+							
+					
+							option = {
+    title: {
+        text: '一天用电量分布',
+        subtext: '纯属虚构'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        }
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+            formatter: '{value} W'
+        },
+        axisPointer: {
+            snap: true
+        }
+    },
+    visualMap: {
+        show: false,
+        dimension: 0,
+        pieces: [{
+            lte: 6,
+            color: 'green'
+        }, {
+            gt: 6,
+            lte: 8,
+            color: 'red'
+        }, {
+            gt: 8,
+            lte: 14,
+            color: 'green'
+        }, {
+            gt: 14,
+            lte: 17,
+            color: 'red'
+        }, {
+            gt: 17,
+            color: 'green'
+        }]
+    },
+    series: [
+        {
+            name: '用电量',
+            type: 'line',
+            smooth: true,
+            data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+            markArea: {
+                itemStyle: {
+                    color: 'rgba(255, 173, 177, 0.4)'
+                },
+                data: [ [{
+                    name: '早高峰',
+                    xAxis: '07:30'
+                }, {
+                    xAxis: '10:00'
+                }], [{
+                    name: '晚高峰',
+                    xAxis: '17:30'
+                }, {
+                    xAxis: '21:15'
+                }] ]
+            }
+        }
+    ]
+};
+							// option && myChart.setOption(option);
+							if(option && typeof option === "object") {
+											myChart.setOption(option, true);
+										}
+					
+					
+					</script>
+					</div>
+				</div>
+			</div>
+		<!-- <div id="bottom">
+			<span>
+				地址判断 &copy;2021
+			</span>
+		</div> -->
+</body>
+</html>
+
+{{end}}
